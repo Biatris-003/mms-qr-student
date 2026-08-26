@@ -4,352 +4,1466 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#7c3aed">
+
 <title>MMS Academy Student & Parent Portal</title>
+
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#f5f3ff,#f8fafc);color:#1f2937}
-.container{width:100%;max-width:720px;margin:auto;padding:18px}
-.header{background:linear-gradient(135deg,#7c3aed,#4c1d95);color:white;padding:28px 20px;border-radius:24px;text-align:center;box-shadow:0 10px 30px rgba(76,29,149,.18);margin-bottom:18px}
-.logo{font-size:44px}.header h1{margin:0;font-size:27px}.header p{margin:8px 0 0;opacity:.9}
-.card{background:white;padding:20px;border-radius:20px;margin-bottom:18px;box-shadow:0 5px 20px rgba(0,0,0,.06)}
-button{width:100%;padding:15px;border:0;border-radius:13px;font-size:16px;font-weight:800;cursor:pointer}
-.start{background:#7c3aed;color:white}.stop{background:#dc2626;color:white;display:none;margin-top:10px}.manual{background:#4c1d95;color:white}
-#reader{width:100%;margin-top:16px;overflow:hidden;border-radius:16px}
-.status{display:none;padding:14px;border-radius:13px;margin-top:14px;text-align:center;font-weight:700;line-height:1.5}
-.status.info{display:block;background:#ede9fe;color:#5b21b6}.status.success{display:block;background:#dcfce7;color:#166534}.status.error{display:block;background:#fee2e2;color:#991b1b}
-label{display:block;font-weight:700;margin-bottom:7px}
-input{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:12px;font-size:16px;margin-bottom:12px}
-.student-head{text-align:center}.avatar{font-size:60px}.student-name{font-size:29px;font-weight:900;color:#6d28d9}.student-meta{color:#64748b;margin-top:6px}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
-.stat{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:16px;padding:15px;text-align:center}.stat-label{font-size:12px;color:#6b7280;font-weight:800}.stat-value{font-size:20px;font-weight:900;color:#4c1d95;margin-top:6px}
-.section-title{font-size:21px;font-weight:900;margin-bottom:14px}.latest-teacher{background:#f8fafc;border-radius:14px;padding:12px;margin-bottom:14px}
-.session{border:1px solid #e5e7eb;border-radius:17px;padding:16px;margin-bottom:12px}.session-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.session-name{font-weight:900}.session-date{color:#64748b;font-size:13px}.session-status{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;background:#dcfce7;color:#166534}.session-status.late{background:#fef3c7;color:#92400e}
-.stars{color:#f59e0b;font-size:21px;letter-spacing:2px;margin:7px 0}.no-rating{color:#94a3b8;font-size:13px}.note{background:#f8fafc;border-radius:12px;padding:11px;color:#475569;line-height:1.5;margin-top:8px}
-.payment{border:1px solid #e5e7eb;border-radius:16px;padding:15px;margin-bottom:10px}.payment-row{display:flex;justify-content:space-between;gap:10px;margin:5px 0}.payment-amount{font-weight:900;color:#166534}
-.small{text-align:center;color:#64748b;font-size:13px;margin-top:10px}.footer{text-align:center;color:#94a3b8;font-size:12px;padding-bottom:20px}
-.hidden{display:none}
-@media(max-width:480px){.stats{grid-template-columns:1fr 1fr}.session-top{display:block}.session-date{margin-top:4px}}
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f5f3ff,#f8fafc);
+  color:#1f2937;
+}
+
+.container{
+  width:100%;
+  max-width:720px;
+  margin:auto;
+  padding:18px;
+}
+
+.header{
+  background:linear-gradient(135deg,#7c3aed,#4c1d95);
+  color:white;
+  padding:28px 20px;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(76,29,149,.18);
+  margin-bottom:18px;
+}
+
+.logo{
+  font-size:44px
+}
+
+.header h1{
+  margin:0;
+  font-size:27px
+}
+
+.header p{
+  margin:8px 0 0;
+  opacity:.9
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+button{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:13px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.start{
+  background:#7c3aed;
+  color:white;
+}
+
+.stop{
+  background:#dc2626;
+  color:white;
+  display:none;
+  margin-top:10px;
+}
+
+#reader{
+  width:100%;
+  margin-top:16px;
+  overflow:hidden;
+  border-radius:16px;
+}
+
+.status{
+  display:none;
+  padding:14px;
+  border-radius:13px;
+  margin-top:14px;
+  text-align:center;
+  font-weight:700;
+  line-height:1.5;
+}
+
+.status.info{
+  display:block;
+  background:#ede9fe;
+  color:#5b21b6;
+}
+
+.status.success{
+  display:block;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.status.error{
+  display:block;
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.student-head{
+  text-align:center;
+}
+
+.avatar{
+  font-size:60px;
+}
+
+.student-name{
+  font-size:29px;
+  font-weight:900;
+  color:#6d28d9;
+}
+
+.student-meta{
+  color:#64748b;
+  margin-top:6px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.stat{
+  background:#f5f3ff;
+  border:1px solid #ddd6fe;
+  border-radius:16px;
+  padding:15px;
+  text-align:center;
+}
+
+.stat-label{
+  font-size:12px;
+  color:#6b7280;
+  font-weight:800;
+}
+
+.stat-value{
+  font-size:20px;
+  font-weight:900;
+  color:#4c1d95;
+  margin-top:6px;
+}
+
+.section-title{
+  font-size:21px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+
+.latest-teacher{
+  background:#f8fafc;
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:14px;
+}
+
+.session{
+  border:1px solid #e5e7eb;
+  border-radius:17px;
+  padding:16px;
+  margin-bottom:12px;
+}
+
+.session-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.session-name{
+  font-weight:900;
+}
+
+.session-date{
+  color:#64748b;
+  font-size:13px;
+}
+
+.session-status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.session-status.late{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+
+/* SAME STAR STYLE AS REVIEW PAGE */
+
+.rating-box{
+  margin-top:14px;
+  padding:13px;
+  background:#fffbeb;
+  border-radius:14px;
+  text-align:center;
+}
+
+.rating-label{
+  font-weight:900;
+  color:#92400e;
+  font-size:13px;
+}
+
+.stars{
+  color:#f59e0b;
+  font-size:29px;
+  letter-spacing:3px;
+  margin:6px 0 2px;
+}
+
+.rating-number{
+  font-size:13px;
+  font-weight:900;
+  color:#92400e;
+}
+
+.no-rating{
+  color:#94a3b8;
+  font-size:13px;
+  margin-top:9px;
+}
+
+.note{
+  background:#f8fafc;
+  border-radius:12px;
+  padding:11px;
+  color:#475569;
+  line-height:1.5;
+  margin-top:8px;
+}
+
+.payment{
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.payment-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin:5px 0;
+}
+
+.payment-amount{
+  font-weight:900;
+  color:#166534;
+}
+
+.small{
+  text-align:center;
+  color:#64748b;
+  font-size:13px;
+  margin-top:10px;
+}
+
+.footer{
+  text-align:center;
+  color:#94a3b8;
+  font-size:12px;
+  padding-bottom:20px;
+}
+
+.hidden{
+  display:none;
+}
+
+@media(max-width:480px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .session-top{
+    display:block;
+  }
+
+  .session-date{
+    margin-top:4px;
+  }
+
+  .stars{
+    font-size:25px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
+
   <div class="header">
+
     <div class="logo">🎓</div>
+
     <h1>MMS ACADEMY</h1>
+
     <p>Student & Parent Portal</p>
+
   </div>
 
+
+  <!-- QR ONLY -->
+
   <div class="card">
-    <button id="startButton" class="start" onclick="startScanner()">📷 SCAN STUDENT QR</button>
-    <button id="stopButton" class="stop" onclick="stopScanner()">⛔ STOP SCANNING</button>
+
+    <button
+      id="startButton"
+      class="start"
+      onclick="startScanner()"
+    >
+      📷 SCAN STUDENT QR
+    </button>
+
+
+    <button
+      id="stopButton"
+      class="stop"
+      onclick="stopScanner()"
+    >
+      ⛔ STOP SCANNING
+    </button>
+
+
     <div id="reader"></div>
-    <div id="status" class="status"></div>
-    <div class="small">Scan the student's QR code to view attendance, session notes, ratings, teacher and payment information.</div>
+
+    <div
+      id="status"
+      class="status"
+    ></div>
+
+
+    <div class="small">
+      Scan the student's QR code to view attendance,
+      ratings, session feedback, teacher and payment information.
+    </div>
+
   </div>
 
-  <div class="card">
-    <label>Or enter Student ID</label>
-    <input id="manualId" placeholder="Example: MMS-001">
-    <button class="manual" onclick="loadStudent(document.getElementById('manualId').value.trim())">VIEW STUDENT PROFILE</button>
-  </div>
 
-  <div id="profile" class="hidden">
+  <!-- PROFILE -->
+
+  <div
+    id="profile"
+    class="hidden"
+  >
+
     <div class="card student-head">
-      <div class="avatar">👨‍🎓</div>
-      <div id="studentName" class="student-name"></div>
-      <div id="studentId" class="student-meta"></div>
-      <div id="studentLevel" class="student-meta"></div>
+
+      <div class="avatar">
+        👨‍🎓
+      </div>
+
+      <div
+        id="studentName"
+        class="student-name"
+      ></div>
+
+      <div
+        id="studentId"
+        class="student-meta"
+      ></div>
+
+      <div
+        id="studentLevel"
+        class="student-meta"
+      ></div>
+
 
       <div class="stats">
+
         <div class="stat">
-          <div class="stat-label">MONTHLY FEE</div>
-          <div id="monthlyFee" class="stat-value"></div>
+
+          <div class="stat-label">
+            MONTHLY FEE
+          </div>
+
+          <div
+            id="monthlyFee"
+            class="stat-value"
+          ></div>
+
         </div>
+
+
         <div class="stat">
-          <div class="stat-label">LAST PAYMENT</div>
-          <div id="lastPayment" class="stat-value" style="font-size:16px"></div>
+
+          <div class="stat-label">
+            LAST PAYMENT
+          </div>
+
+          <div
+            id="lastPayment"
+            class="stat-value"
+            style="font-size:16px"
+          ></div>
+
         </div>
+
       </div>
+
     </div>
 
-    <div class="card">
-      <div class="section-title">👨‍🏫 Teacher</div>
-      <div id="teacher" class="latest-teacher">No teacher recorded yet.</div>
-    </div>
+
+    <!-- TEACHER -->
 
     <div class="card">
-      <div class="section-title">📚 Session History & Feedback</div>
+
+      <div class="section-title">
+        👨‍🏫 Teacher
+      </div>
+
+      <div
+        id="teacher"
+        class="latest-teacher"
+      >
+        No teacher recorded yet.
+      </div>
+
+    </div>
+
+
+    <!-- SESSION HISTORY -->
+
+    <div class="card">
+
+      <div class="section-title">
+        📚 Session History & Feedback
+      </div>
+
       <div id="sessions"></div>
+
     </div>
+
+
+    <!-- PAYMENTS -->
 
     <div class="card">
-      <div class="section-title">💳 Payment History</div>
+
+      <div class="section-title">
+        💳 Payment History
+      </div>
+
       <div id="payments"></div>
+
     </div>
 
-    <div class="card" id="academyNotesCard">
-      <div class="section-title">📝 Academy Notes</div>
-      <div id="academyNotes" class="note"></div>
+
+    <!-- ACADEMY NOTES -->
+
+    <div
+      class="card"
+      id="academyNotesCard"
+    >
+
+      <div class="section-title">
+        📝 Academy Notes
+      </div>
+
+      <div
+        id="academyNotes"
+        class="note"
+      ></div>
+
     </div>
+
   </div>
 
-  <div class="footer">MMS Academy • Student & Parent Portal</div>
+
+  <div class="footer">
+    MMS Academy • Student & Parent Portal
+  </div>
+
 </div>
 
-<script>
-const BACKEND_URL =
-  "https://script.google.com/macros/s/AKfycbwx9Selm8_W6HfRJdV52atYR-ZSeb-w4Z6qBqlrAXaknRwzvWl1SspM0tUOg9GvaDfw2w/exec";
 
-const APP_TOKEN =
+<script>
+
+const BACKEND_URL =
+  "https://script.google.com/macros/s/AKfycbxG3uW7K4FfxlW7fME9J-IMYXzicbnaMCua74FRP9QMSkuY41IenAFwO_PJ4voTPG_xQQ/exec";
+
+
+/*
+ * IMPORTANT:
+ *
+ * Student/Parent portal uses PUBLIC_TOKEN.
+ *
+ * It must match Code.gs CONFIG.PUBLIC_TOKEN.
+ */
+
+const PUBLIC_TOKEN =
   "MMS-QR-2026-Cairo-PUBLIC-9Nq4T7x2V8";
 
+
 let scanner = null;
+
 let scannerRunning = false;
+
 let processingScan = false;
 
-async function startScanner() {
-  if (scannerRunning) return;
 
-  if (!window.isSecureContext) {
-    showStatus("error","❌ Camera access requires HTTPS.<br><br>Open the GitHub Pages HTTPS URL.");
+/* =========================================================
+   SCANNER
+   ========================================================= */
+
+async function startScanner(){
+
+  if(scannerRunning){
     return;
   }
 
-  try {
-    showStatus("info","📷 Requesting camera permission...");
-    scanner = new Html5Qrcode("reader");
 
-    const cameras = await Html5Qrcode.getCameras();
-    if (!cameras || !cameras.length) throw new Error("No camera was found.");
+  if(!window.isSecureContext){
 
-    let selected = cameras[0];
-    const preferred = cameras.find(function(c) {
-      const label = String(c.label || "").toLowerCase();
-      return label.includes("back") || label.includes("rear") || label.includes("environment");
-    });
-    if (preferred) selected = preferred;
+    showStatus(
+      "error",
+      "❌ Camera access requires HTTPS.<br><br>" +
+      "Open the GitHub Pages HTTPS URL."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    showStatus(
+      "info",
+      "📷 Requesting camera permission..."
+    );
+
+
+    scanner =
+      new Html5Qrcode(
+        "reader"
+      );
+
+
+    const cameras =
+      await Html5Qrcode.getCameras();
+
+
+    if(
+      !cameras ||
+      !cameras.length
+    ){
+
+      throw new Error(
+        "No camera was found."
+      );
+    }
+
+
+    let selected =
+      cameras[0];
+
+
+    const preferred =
+      cameras.find(
+        function(c){
+
+          const label =
+            String(
+              c.label || ""
+            ).toLowerCase();
+
+
+          return (
+            label.includes("back") ||
+            label.includes("rear") ||
+            label.includes("environment")
+          );
+        }
+      );
+
+
+    if(preferred){
+      selected = preferred;
+    }
+
 
     await scanner.start(
+
       selected.id,
-      {fps:10,qrbox:{width:250,height:250},aspectRatio:1.7777778},
+
+      {
+        fps:10,
+
+        qrbox:{
+          width:250,
+          height:250
+        },
+
+        aspectRatio:1.7777778
+      },
+
       onScanSuccess,
+
       function(){}
     );
 
+
     scannerRunning = true;
-    document.getElementById("startButton").style.display = "none";
-    document.getElementById("stopButton").style.display = "block";
-    showStatus("info","📷 Camera ready. Point it at the student's QR code.");
-  } catch(error) {
+
+
+    document
+      .getElementById(
+        "startButton"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "stopButton"
+      )
+      .style.display =
+        "block";
+
+
+    showStatus(
+      "info",
+      "📷 Camera ready. Point it at the student's QR code."
+    );
+
+
+  }catch(error){
+
     console.error(error);
-    showStatus("error","❌ Could not access the camera.<br><br>" + String(error.message || error));
+
+
+    showStatus(
+      "error",
+      "❌ Could not access the camera.<br><br>" +
+      String(
+        error.message || error
+      )
+    );
   }
 }
 
-async function stopScanner() {
-  if (!scanner) return;
 
-  try { if (scannerRunning) await scanner.stop(); } catch(e) {}
-  try { await scanner.clear(); } catch(e) {}
+async function stopScanner(){
 
-  scanner = null;
-  scannerRunning = false;
-  document.getElementById("startButton").style.display = "block";
-  document.getElementById("stopButton").style.display = "none";
-}
-
-async function onScanSuccess(decodedText) {
-  if (processingScan) return;
-  processingScan = true;
-  await stopScanner();
-  loadStudent(String(decodedText || "").trim());
-}
-
-function loadStudent(studentId) {
-  studentId = String(studentId || "").trim();
-
-  if (!studentId) {
-    showStatus("error","❌ Enter or scan a Student ID.");
-    processingScan = false;
+  if(!scanner){
     return;
   }
 
-  showStatus("info","⏳ Loading student information...");
+
+  try{
+
+    if(scannerRunning){
+      await scanner.stop();
+    }
+
+  }catch(e){}
+
+
+  try{
+    await scanner.clear();
+  }catch(e){}
+
+
+  scanner = null;
+
+  scannerRunning = false;
+
+
+  document
+    .getElementById(
+      "startButton"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "stopButton"
+    )
+    .style.display =
+      "none";
+}
+
+
+async function onScanSuccess(
+  decodedText
+){
+
+  if(processingScan){
+    return;
+  }
+
+
+  processingScan = true;
+
+
+  await stopScanner();
+
+
+  loadStudent(
+    String(
+      decodedText || ""
+    ).trim()
+  );
+}
+
+
+/* =========================================================
+   LOAD STUDENT
+   ========================================================= */
+
+function loadStudent(
+  studentId
+){
+
+  studentId =
+    String(
+      studentId || ""
+    ).trim();
+
+
+  if(!studentId){
+
+    showStatus(
+      "error",
+      "❌ Invalid Student QR code."
+    );
+
+    processingScan = false;
+
+    return;
+  }
+
+
+  showStatus(
+    "info",
+    "⏳ Loading student information..."
+  );
+
 
   jsonpRequest(
+
     "studentprofile",
-    {studentId:studentId},
-    function(response) {
+
+    {
+      studentId:
+        studentId
+    },
+
+    function(response){
+
       processingScan = false;
 
-      if (!response || !response.success) {
-        showStatus("error","❌ " + ((response && response.message) || "Student not found."));
+
+      if(
+        !response ||
+        !response.success
+      ){
+
+        showStatus(
+          "error",
+          "❌ " +
+          (
+            response &&
+            response.message
+              ? response.message
+              : "Student not found."
+          )
+        );
+
         return;
       }
 
-      renderProfile(response);
-      showStatus("success","✅ Student profile loaded successfully.");
+
+      renderProfile(
+        response
+      );
+
+
+      showStatus(
+        "success",
+        "✅ Student profile loaded successfully."
+      );
     }
   );
 }
 
-function renderProfile(data) {
-  const student = data.student || {};
 
-  document.getElementById("profile").classList.remove("hidden");
-  document.getElementById("studentName").textContent = student.name || "";
-  document.getElementById("studentId").textContent = "Student ID: " + (student.id || "");
-  document.getElementById("studentLevel").textContent = "Level: " + (student.level || "");
+/* =========================================================
+   PROFILE
+   ========================================================= */
 
-  document.getElementById("monthlyFee").textContent =
-    formatMoney(student.monthlyFee) + " EGP";
+function renderProfile(
+  data
+){
 
-  document.getElementById("lastPayment").textContent =
-    student.lastPayment || "No payment yet";
+  const student =
+    data.student || {};
 
-  document.getElementById("teacher").textContent =
-    data.latestTeacher || "No teacher recorded yet.";
 
-  renderSessions(data.sessions || []);
-  renderPayments(data.payments || []);
+  document
+    .getElementById(
+      "profile"
+    )
+    .classList
+    .remove("hidden");
 
-  const academyNotes = String(student.academyNotes || "").trim();
-  const notesCard = document.getElementById("academyNotesCard");
 
-  if (academyNotes) {
-    notesCard.style.display = "block";
-    document.getElementById("academyNotes").textContent = academyNotes;
-  } else {
-    notesCard.style.display = "none";
+  document
+    .getElementById(
+      "studentName"
+    )
+    .textContent =
+      student.name || "";
+
+
+  document
+    .getElementById(
+      "studentId"
+    )
+    .textContent =
+      "Student ID: " +
+      (
+        student.id || ""
+      );
+
+
+  document
+    .getElementById(
+      "studentLevel"
+    )
+    .textContent =
+      "Level: " +
+      (
+        student.level || ""
+      );
+
+
+  document
+    .getElementById(
+      "monthlyFee"
+    )
+    .textContent =
+      formatMoney(
+        student.monthlyFee
+      ) +
+      " EGP";
+
+
+  document
+    .getElementById(
+      "lastPayment"
+    )
+    .textContent =
+      student.lastPayment ||
+      "No payment yet";
+
+
+  document
+    .getElementById(
+      "teacher"
+    )
+    .textContent =
+      data.latestTeacher ||
+      "No teacher recorded yet.";
+
+
+  renderSessions(
+    data.sessions || []
+  );
+
+
+  renderPayments(
+    data.payments || []
+  );
+
+
+  const academyNotes =
+    String(
+      student.academyNotes || ""
+    ).trim();
+
+
+  const notesCard =
+    document.getElementById(
+      "academyNotesCard"
+    );
+
+
+  if(academyNotes){
+
+    notesCard.style.display =
+      "block";
+
+
+    document
+      .getElementById(
+        "academyNotes"
+      )
+      .textContent =
+        academyNotes;
+
+  }else{
+
+    notesCard.style.display =
+      "none";
   }
 
-  document.getElementById("profile").scrollIntoView({behavior:"smooth",block:"start"});
+
+  document
+    .getElementById(
+      "profile"
+    )
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
 }
 
-function renderSessions(sessions) {
-  const container = document.getElementById("sessions");
 
-  if (!sessions.length) {
-    container.innerHTML = '<div class="small">No session records yet.</div>';
+/* =========================================================
+   SESSION HISTORY
+   ========================================================= */
+
+function renderSessions(
+  sessions
+){
+
+  const container =
+    document.getElementById(
+      "sessions"
+    );
+
+
+  if(!sessions.length){
+
+    container.innerHTML =
+      '<div class="small">' +
+      'No session records yet.' +
+      '</div>';
+
     return;
   }
 
-  container.innerHTML = sessions.map(function(item) {
-    const rating = Number(item.rating || 0);
-    let stars = "";
 
-    if (rating >= 1 && rating <= 5) {
-      for (let i=1;i<=5;i++) stars += i <= rating ? "★" : "☆";
-      stars = '<div class="stars" aria-label="' + rating + ' out of 5 stars">' + stars + '</div>';
-    } else {
-      stars = '<div class="no-rating">No rating recorded</div>';
+  container.innerHTML =
+    sessions.map(
+      function(item){
+
+        const rating =
+          Number(
+            item.rating || 0
+          );
+
+
+        let ratingHtml =
+          "";
+
+
+        if(
+          rating >= 1 &&
+          rating <= 5
+        ){
+
+          let stars = "";
+
+
+          for(
+            let i = 1;
+            i <= 5;
+            i++
+          ){
+
+            stars +=
+              i <= rating
+                ? "★"
+                : "☆";
+          }
+
+
+          ratingHtml =
+
+            '<div class="rating-box">' +
+
+              '<div class="rating-label">' +
+                '⭐ SESSION RATING' +
+              '</div>' +
+
+              '<div class="stars">' +
+                stars +
+              '</div>' +
+
+              '<div class="rating-number">' +
+                rating +
+                ' / 5' +
+              '</div>' +
+
+            '</div>';
+
+        }else{
+
+          ratingHtml =
+            '<div class="no-rating">' +
+              '⭐ No rating recorded yet' +
+            '</div>';
+        }
+
+
+        const statusClass =
+          String(
+            item.status || ""
+          ).toLowerCase() ===
+          "late"
+            ? "session-status late"
+            : "session-status";
+
+
+        const late =
+          String(
+            item.status || ""
+          ).toLowerCase() ===
+          "late"
+            ? " • " +
+              (
+                item.lateMinutes ||
+                0
+              ) +
+              " min late"
+            : "";
+
+
+        const note =
+          String(
+            item.notes || ""
+          ).trim();
+
+
+        return (
+
+          '<div class="session">' +
+
+            '<div class="session-top">' +
+
+              '<div class="session-name">' +
+                escapeHtml(
+                  item.session ||
+                  "Session"
+                ) +
+              '</div>' +
+
+              '<div class="session-date">' +
+                escapeHtml(
+                  item.date || ""
+                ) +
+                ' ' +
+                escapeHtml(
+                  item.time || ""
+                ) +
+              '</div>' +
+
+            '</div>' +
+
+
+            '<div style="margin-top:8px">' +
+
+              '<span class="' +
+                statusClass +
+              '">' +
+
+                escapeHtml(
+                  item.status ||
+                  "Present"
+                ) +
+
+              '</span>' +
+
+              '<span style="color:#64748b;font-size:13px">' +
+
+                ' • Teacher: ' +
+
+                escapeHtml(
+                  item.teacher ||
+                  "—"
+                ) +
+
+                escapeHtml(
+                  late
+                ) +
+
+              '</span>' +
+
+            '</div>' +
+
+
+            ratingHtml +
+
+
+            (
+              note
+                ? '<div class="note">' +
+                    '📝 ' +
+                    escapeHtml(note) +
+                  '</div>'
+                : ''
+            ) +
+
+          '</div>'
+        );
+      }
+    ).join("");
+}
+
+
+/* =========================================================
+   PAYMENTS
+   ========================================================= */
+
+function renderPayments(
+  payments
+){
+
+  const container =
+    document.getElementById(
+      "payments"
+    );
+
+
+  if(!payments.length){
+
+    container.innerHTML =
+      '<div class="small">' +
+      'No payments recorded yet.' +
+      '</div>';
+
+    return;
+  }
+
+
+  container.innerHTML =
+    payments.map(
+      function(p){
+
+        return (
+
+          '<div class="payment">' +
+
+            '<div class="payment-row">' +
+
+              '<strong>' +
+                escapeHtml(
+                  p.month || ""
+                ) +
+              '</strong>' +
+
+              '<span class="payment-amount">' +
+                formatMoney(
+                  p.amount
+                ) +
+                ' EGP' +
+              '</span>' +
+
+            '</div>' +
+
+
+            '<div class="payment-row">' +
+
+              '<span>Payment date</span>' +
+
+              '<span>' +
+                escapeHtml(
+                  p.date || ""
+                ) +
+              '</span>' +
+
+            '</div>' +
+
+
+            '<div class="payment-row">' +
+
+              '<span>Method</span>' +
+
+              '<span>' +
+                escapeHtml(
+                  p.paymentMethod || ""
+                ) +
+              '</span>' +
+
+            '</div>' +
+
+
+            '<div class="payment-row">' +
+
+              '<span>Received by</span>' +
+
+              '<span>' +
+                escapeHtml(
+                  p.receivedBy || ""
+                ) +
+              '</span>' +
+
+            '</div>' +
+
+
+            (
+              p.notes
+                ? '<div class="note">' +
+                    '📝 ' +
+                    escapeHtml(
+                      p.notes
+                    ) +
+                  '</div>'
+                : ''
+            ) +
+
+          '</div>'
+        );
+      }
+    ).join("");
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function formatMoney(
+  value
+){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits:2
     }
-
-    const statusClass =
-      String(item.status || "").toLowerCase() === "late"
-        ? "session-status late"
-        : "session-status";
-
-    const late =
-      item.status === "Late"
-        ? " • " + (item.lateMinutes || 0) + " min late"
-        : "";
-
-    const note =
-      String(item.notes || "").trim();
-
-    return (
-      '<div class="session">' +
-        '<div class="session-top">' +
-          '<div class="session-name">' + escapeHtml(item.session || "Session") + '</div>' +
-          '<div class="session-date">' + escapeHtml(item.date || "") + ' ' + escapeHtml(item.time || "") + '</div>' +
-        '</div>' +
-        '<div style="margin-top:8px">' +
-          '<span class="' + statusClass + '">' + escapeHtml(item.status || "Present") + '</span>' +
-          '<span style="color:#64748b;font-size:13px"> • Teacher: ' + escapeHtml(item.teacher || "—") + late + '</span>' +
-        '</div>' +
-        stars +
-        (note ? '<div class="note">📝 ' + escapeHtml(note) + '</div>' : '') +
-      '</div>'
-    );
-  }).join("");
+  );
 }
 
-function renderPayments(payments) {
-  const container = document.getElementById("payments");
 
-  if (!payments.length) {
-    container.innerHTML = '<div class="small">No payments recorded yet.</div>';
-    return;
-  }
+function escapeHtml(
+  value
+){
 
-  container.innerHTML = payments.map(function(p) {
-    return (
-      '<div class="payment">' +
-        '<div class="payment-row"><strong>' + escapeHtml(p.month || "") + '</strong><span class="payment-amount">' + formatMoney(p.amount) + ' EGP</span></div>' +
-        '<div class="payment-row"><span>Payment date</span><span>' + escapeHtml(p.date || "") + '</span></div>' +
-        '<div class="payment-row"><span>Method</span><span>' + escapeHtml(p.paymentMethod || "") + '</span></div>' +
-        '<div class="payment-row"><span>Received by</span><span>' + escapeHtml(p.receivedBy || "") + '</span></div>' +
-        (p.notes ? '<div class="note">📝 ' + escapeHtml(p.notes) + '</div>' : '') +
-      '</div>'
-    );
-  }).join("");
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 }
 
-function formatMoney(value) {
-  return Number(value || 0).toLocaleString("en-US",{maximumFractionDigits:2});
-}
 
-function escapeHtml(value) {
-  return String(value == null ? "" : value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
+/* =========================================================
+   JSONP
+   ========================================================= */
 
-function jsonpRequest(action,params,callback) {
+function jsonpRequest(
+  action,
+  params,
+  callback
+){
+
   const callbackName =
-    "mmsStudentCallback_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+    "mmsStudentCallback_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
+    );
 
-  let script = document.createElement("script");
 
-  window[callbackName] = function(data) {
-    try { callback(data); }
-    finally {
-      delete window[callbackName];
-      if (script && script.parentNode) script.parentNode.removeChild(script);
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  window[callbackName] =
+    function(data){
+
+      try{
+
+        callback(data);
+
+      }finally{
+
+        delete window[
+          callbackName
+        ];
+
+
+        if(
+          script &&
+          script.parentNode
+        ){
+
+          script.parentNode
+            .removeChild(
+              script
+            );
+        }
+      }
+    };
+
+
+  const query =
+    new URLSearchParams();
+
+
+  query.set(
+    "action",
+    action
+  );
+
+
+  query.set(
+    "token",
+    PUBLIC_TOKEN
+  );
+
+
+  query.set(
+    "callback",
+    callbackName
+  );
+
+
+  Object.keys(
+    params || {}
+  ).forEach(
+    function(key){
+
+      query.set(
+        key,
+        params[key]
+      );
     }
-  };
+  );
 
-  const query = new URLSearchParams();
-  query.set("action",action);
-  query.set("token",APP_TOKEN);
-  query.set("callback",callbackName);
 
-  Object.keys(params || {}).forEach(function(key) {
-    query.set(key,params[key]);
-  });
+  script.src =
+    BACKEND_URL +
+    "?" +
+    query.toString();
 
-  script.src = BACKEND_URL + "?" + query.toString();
-  script.onerror = function() {
-    delete window[callbackName];
-    if (script.parentNode) script.parentNode.removeChild(script);
-    processingScan = false;
-    showStatus("error","❌ Could not connect to MMS backend.");
-  };
 
-  document.body.appendChild(script);
+  script.onerror =
+    function(){
+
+      delete window[
+        callbackName
+      ];
+
+
+      if(
+        script.parentNode
+      ){
+
+        script.parentNode
+          .removeChild(
+            script
+          );
+      }
+
+
+      processingScan = false;
+
+
+      showStatus(
+        "error",
+        "❌ Could not connect to MMS backend."
+      );
+    };
+
+
+  document.body.appendChild(
+    script
+  );
 }
 
-function showStatus(type,message) {
-  const el = document.getElementById("status");
-  el.className = "status " + type;
-  el.innerHTML = message;
-  el.style.display = "block";
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+function showStatus(
+  type,
+  message
+){
+
+  const el =
+    document.getElementById(
+      "status"
+    );
+
+
+  el.className =
+    "status " +
+    type;
+
+
+  el.innerHTML =
+    message;
+
+
+  el.style.display =
+    "block";
 }
+
 </script>
+
 </body>
 </html>
